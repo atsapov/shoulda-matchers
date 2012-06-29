@@ -1,5 +1,7 @@
 # HEAD
 
+* Add ability to test `:autosave` option on associations.
+
 # v 2.5.0
 
 * Fix Rails/Test::Unit integration to ensure that the test case classes we are

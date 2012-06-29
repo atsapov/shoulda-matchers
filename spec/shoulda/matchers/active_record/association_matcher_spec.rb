@@ -100,6 +100,24 @@ describe Shoulda::Matchers::ActiveRecord::AssociationMatcher do
       belonging_to_parent.should_not belong_to(:parent).class_name('TreeChild')
     end
 
+    it 'accepts an association with a matching :autosave option' do
+      define_model :parent, :adopter => :boolean
+      define_model :child, :parent_id => :integer do
+        belongs_to :parent, :autosave => true
+      end
+      Child.new.should belong_to(:parent).autosave(true)
+    end
+
+    it 'rejects an association with a non-matching :autosave option with the correct message' do
+      define_model :parent, :adopter => :boolean
+      define_model :child, :parent_id => :integer do
+        belongs_to :parent, :autosave => false
+      end
+      expect {
+        Child.new.should belong_to(:parent).autosave(true)
+      }.to fail_with_message('Expected Child to have a belongs_to association called parent (parent should have autosave set to true)')
+    end
+
     context 'an association with a :validate option' do
       [false, true].each do |validate_value|
         context "when the model has :validate => #{validate_value}" do
@@ -343,6 +361,24 @@ describe Shoulda::Matchers::ActiveRecord::AssociationMatcher do
       having_many_children.should_not have_many(:children).class_name('Node')
     end
 
+    it 'accepts an association with a matching :autosave option' do
+      define_model :child, :parent_id => :integer
+      define_model :parent do
+        has_many :children, :autosave => true
+      end
+      Parent.new.should have_many(:children).autosave(true)
+    end
+
+    it 'rejects an association with a non-matching :autosave option with the correct message' do
+      define_model :child, :parent_id => :integer
+      define_model :parent do
+        has_many :children, :autosave => false
+      end
+      expect {
+        Parent.new.should have_many(:children).autosave(true)
+      }.to fail_with_message('Expected Parent to have a has_many association called children (children should have autosave set to true)')
+    end
+
     context 'validate' do
       it 'accepts when the :validate option matches' do
         having_many_children(:validate => false).should have_many(:children).validate(false)
@@ -487,6 +523,24 @@ describe Shoulda::Matchers::ActiveRecord::AssociationMatcher do
       having_one_detail.should have_one(:detail).class_name('Detail')
     end
 
+    it 'accepts an association with a matching :autosave option' do
+      define_model :detail, :person_id => :integer, :disabled => :boolean
+      define_model :person do
+        has_one :detail, :autosave => true
+      end
+      Person.new.should have_one(:detail).autosave(true)
+    end
+
+    it 'rejects an association with a non-matching :autosave option with the correct message' do
+      define_model :detail, :person_id => :integer, :disabled => :boolean
+      define_model :person do
+        has_one :detail, :autosave => false
+      end
+      expect {
+        Person.new.should have_one(:detail).autosave(true)
+      }.to fail_with_message('Expected Person to have a has_one association called detail (detail should have autosave set to true)')
+    end
+
     it 'accepts an association with a valid :class_name option' do
       define_model :person_detail, :person_id => :integer
       define_model :person do
@@ -628,6 +682,28 @@ describe Shoulda::Matchers::ActiveRecord::AssociationMatcher do
     it 'rejects an association with a bad :class_name option' do
       having_and_belonging_to_many_relatives.
         should_not have_and_belong_to_many(:relatives).class_name('PersonRelatives')
+    end
+
+    it 'accepts an association with a matching :autosave option' do
+      define_model :relatives, :adopted => :boolean
+      define_model :person do
+        has_and_belongs_to_many :relatives, :autosave => true
+      end
+      define_model :people_relative, :person_id   => :integer,
+                                     :relative_id => :integer
+      Person.new.should have_and_belong_to_many(:relatives).autosave(true)
+    end
+
+    it 'rejects an association with a non-matching :autosave option with the correct message' do
+      define_model :relatives, :adopted => :boolean
+      define_model :person do
+        has_and_belongs_to_many :relatives
+      end
+      define_model :people_relative, :person_id   => :integer,
+                                     :relative_id => :integer
+      expect {
+        Person.new.should have_and_belong_to_many(:relatives).autosave(true)
+      }.to fail_with_message('Expected Person to have a has_and_belongs_to_many association called relatives (relatives should have autosave set to true)')
     end
 
     context 'validate' do
