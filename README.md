@@ -67,7 +67,7 @@ describe Post do
 end
 
 describe User do
-  it { is_expected.not_to allow_mass_assignment_of(:encrypted_password) }
+  it { should_not allow_mass_assignment_of(:encrypted_password) }
 end
 
 # Test::Unit
@@ -103,7 +103,7 @@ end
 # RSpec
 describe UserProfile do
   it { should allow_value('http://foo.com', 'http://bar.com/baz').for(:website_url) }
-  it { is_expected.not_to allow_value('asdfjkl').for(:website_url) }
+  it { should_not allow_value('asdfjkl').for(:website_url) }
 
   it { should allow_value(:birthday_as_string).on(:create) }
 
@@ -135,7 +135,7 @@ invalid:
 ```ruby
 describe User do
   # 'b' and 'c' will not be tested
-  it { is_expected.not_to allow_value('a', 'b', 'c').for(:website_url) }
+  it { should_not allow_value('a', 'b', 'c').for(:website_url) }
 end
 ```
 
@@ -1139,7 +1139,7 @@ describe PostsController do
     before { get :show }
 
     it { should set_session(:foo).to('bar') }
-    it { is_expected.not_to set_session(:baz) }
+    it { should_not set_session(:baz) }
   end
 end
 
@@ -1181,7 +1181,7 @@ describe PostsController do
     it { should set_the_flash.to('bar') }
     it { should set_the_flash.to(/bar/) }
     it { should set_the_flash[:foo].to('bar') }
-    it { is_expected.not_to set_the_flash[:baz] }
+    it { should_not set_the_flash[:baz] }
   end
 
   describe 'GET #show' do
@@ -1195,7 +1195,7 @@ describe PostsController do
   describe 'DELETE #destroy' do
     before { delete :destroy }
 
-    it { is_expected.not_to set_the_flash }
+    it { should_not set_the_flash }
   end
 end
 
