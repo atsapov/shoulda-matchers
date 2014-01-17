@@ -53,14 +53,14 @@ When 'I run the rspec generator' do
 end
 
 When 'I configure the application to use rspec-rails' do
-  append_to_gemfile %q(gem 'rspec-rails', '~> 2.13')
+  append_to_gemfile %q(gem 'rspec-rails', '~> 3.0.0.beta')
   steps %{And I install gems}
 end
 
 When 'I configure the application to use rspec-rails in test and development' do
   append_to_gemfile <<-GEMFILE
   group :test, :development do
-    gem 'rspec-rails', '~> 2.13'
+    gem 'rspec-rails', '~> 3.0.0.beta'
   end
   GEMFILE
   steps %{And I install gems}
