@@ -33,7 +33,7 @@ end
 appraise '4.0.0' do
   instance_eval(&rails_4_0)
   gem 'rails', '4.0.0'
-  gem 'sass-rails', '4.0.0'
+  gem 'sass-rails', '4.0.1'
   gem 'bcrypt-ruby', '~> 3.0.0'
 end
 
