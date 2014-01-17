@@ -62,8 +62,8 @@ end
 
 # RSpec
 describe Post do
-  it { is_expected.to allow_mass_assignment_of(:title) }
-  it { is_expected.to allow_mass_assignment_of(:published_status).as(:admin) }
+  it { should allow_mass_assignment_of(:title) }
+  it { should allow_mass_assignment_of(:published_status).as(:admin) }
 end
 
 describe User do
@@ -102,10 +102,10 @@ end
 
 # RSpec
 describe UserProfile do
-  it { is_expected.to allow_value('http://foo.com', 'http://bar.com/baz').for(:website_url) }
+  it { should allow_value('http://foo.com', 'http://bar.com/baz').for(:website_url) }
   it { is_expected.not_to allow_value('asdfjkl').for(:website_url) }
 
-  it { is_expected.to allow_value(:birthday_as_string).on(:create) }
+  it { should allow_value(:birthday_as_string).on(:create) }
 
   it do
     should allow_value('open', 'closed').
@@ -147,7 +147,7 @@ of this, it carries the same caveat when multiple values are provided:
 ```ruby
 describe User do
   # 'b' and 'c' will not be tested
-  it { is_expected.to disallow_value('a', 'b', 'c').for(:website_url) }
+  it { should disallow_value('a', 'b', 'c').for(:website_url) }
 end
 ```
 
@@ -169,8 +169,8 @@ end
 
 # RSpec
 describe Issue do
-  it { is_expected.to ensure_inclusion_of(:state).in_array(%w(open resolved unresolved))
-  it { is_expected.to ensure_inclusion_of(:state).in_range(1..5) }
+  it { should ensure_inclusion_of(:state).in_array(%w(open resolved unresolved))
+  it { should ensure_inclusion_of(:state).in_range(1..5) }
 
   it do
     should ensure_inclusion_of(:severity).
@@ -207,8 +207,8 @@ end
 
 # RSpec
 describe Game do
-  it { is_expected.to ensure_exclusion_of(:supported_os).in_array(['Mac', 'Linux']) }
-  it { is_expected.to ensure_exclusion_of(:floors_with_enemies).in_range(5..8) }
+  it { should ensure_exclusion_of(:supported_os).in_array(['Mac', 'Linux']) }
+  it { should ensure_exclusion_of(:floors_with_enemies).in_range(5..8) }
 
   it do
     should ensure_exclusion_of(:weapon).
@@ -250,10 +250,10 @@ end
 
 # RSpec
 describe User do
-  it { is_expected.to ensure_length_of(:bio).is_at_least(15) }
-  it { is_expected.to ensure_length_of(:favorite_superhero).is_equal_to(6) }
-  it { is_expected.to ensure_length_of(:status_update).is_at_most(140) }
-  it { is_expected.to ensure_length_of(:password).is_at_least(5).is_at_most(30) }
+  it { should ensure_length_of(:bio).is_at_least(15) }
+  it { should ensure_length_of(:favorite_superhero).is_equal_to(6) }
+  it { should ensure_length_of(:status_update).is_at_most(140) }
+  it { should ensure_length_of(:password).is_at_least(5).is_at_most(30) }
 
   it do
     should ensure_length_of(:api_token).
@@ -303,7 +303,7 @@ end
 
 # RSpec
 describe User do
-  it { is_expected.to have_secure_password }
+  it { should have_secure_password }
 end
 
 # Test::Unit
@@ -328,7 +328,7 @@ end
 
 # RSpec
 describe Tank do
-  it { is_expected.to validate_absence_of(:arms) }
+  it { should validate_absence_of(:arms) }
 
   it do
     should validate_absence_of(:legs).
@@ -359,7 +359,7 @@ end
 
 # RSpec
 describe Registration do
-  it { is_expected.to validate_acceptance_of(:eula) }
+  it { should validate_acceptance_of(:eula) }
 
   it do
     should validate_acceptance_of(:terms_of_service).
@@ -431,15 +431,15 @@ end
 
 # RSpec
 describe Person do
-  it { is_expected.to validate_numericality_of(:gpa) }
-  it { is_expected.to validate_numericality_of(:age).only_integer }
-  it { is_expected.to validate_numericality_of(:legal_age).is_greater_than(21) }
-  it { is_expected.to validate_numericality_of(:height).is_greater_than_or_equal_to(55) }
-  it { is_expected.to validate_numericality_of(:weight).is_equal_to(150) }
-  it { is_expected.to validate_numericality_of(:number_of_cars).is_less_than(2) }
-  it { is_expected.to validate_numericality_of(:birth_year).is_less_than_or_equal_to(1987) }
-  it { is_expected.to validate_numericality_of(:birth_day).odd }
-  it { is_expected.to validate_numericality_of(:birth_month).even }
+  it { should validate_numericality_of(:gpa) }
+  it { should validate_numericality_of(:age).only_integer }
+  it { should validate_numericality_of(:legal_age).is_greater_than(21) }
+  it { should validate_numericality_of(:height).is_greater_than_or_equal_to(55) }
+  it { should validate_numericality_of(:weight).is_equal_to(150) }
+  it { should validate_numericality_of(:number_of_cars).is_less_than(2) }
+  it { should validate_numericality_of(:birth_year).is_less_than_or_equal_to(1987) }
+  it { should validate_numericality_of(:birth_day).odd }
+  it { should validate_numericality_of(:birth_month).even }
 
   it do
     should validate_numericality_of(:number_of_dependents).
@@ -477,8 +477,8 @@ end
 
 # RSpec
 describe Robot do
-  it { is_expected.to validate_presence_of(:arms) }
-  it { is_expected.to validate_presence_of(:legs).with_message('Robot has no legs') }
+  it { should validate_presence_of(:arms) }
+  it { should validate_presence_of(:legs).with_message('Robot has no legs') }
 end
 
 # Test::Unit
@@ -505,10 +505,10 @@ end
 
 # RSpec
 describe Post do
-  it { is_expected.to validate_uniqueness_of(:permalink) }
-  it { is_expected.to validate_uniqueness_of(:slug).scoped_to(:journal_id) }
-  it { is_expected.to validate_uniqueness_of(:key).case_insensitive }
-  it { is_expected.to validate_uniqueness_of(:author_id).allow_nil }
+  it { should validate_uniqueness_of(:permalink) }
+  it { should validate_uniqueness_of(:slug).scoped_to(:journal_id) }
+  it { should validate_uniqueness_of(:key).case_insensitive }
+  it { should validate_uniqueness_of(:author_id).allow_nil }
 
   it do
     should validate_uniqueness_of(:title).
@@ -576,10 +576,10 @@ end
 
 # RSpec
 describe Car do
-  it { is_expected.to accept_nested_attributes_for(:doors) }
-  it { is_expected.to accept_nested_attributes_for(:mirrors).allow_destroy(true) }
-  it { is_expected.to accept_nested_attributes_for(:windows).limit(3) }
-  it { is_expected.to accept_nested_attributes_for(:engine).update_only(true) }
+  it { should accept_nested_attributes_for(:doors) }
+  it { should accept_nested_attributes_for(:mirrors).allow_destroy(true) }
+  it { should accept_nested_attributes_for(:windows).limit(3) }
+  it { should accept_nested_attributes_for(:engine).update_only(true) }
 end
 
 # Test::Unit (using Shoulda)
@@ -608,13 +608,13 @@ end
 
 # RSpec
 describe Person do
-  it { is_expected.to belong_to(:organization) }
-  it { is_expected.to belong_to(:family).conditions(everyone_is_perfect: false) }
-  it { is_expected.to belong_to(:previous_company).order('hired_on desc') }
-  it { is_expected.to belong_to(:ancient_city).class_name('City') }
-  it { is_expected.to belong_to(:great_country).with_foreign_key('country_id') }
-  it { is_expected.to belong_to(:mental_institution).touch(true) }
-  it { is_expected.to belong_to(:world).dependent(:destroy) }
+  it { should belong_to(:organization) }
+  it { should belong_to(:family).conditions(everyone_is_perfect: false) }
+  it { should belong_to(:previous_company).order('hired_on desc') }
+  it { should belong_to(:ancient_city).class_name('City') }
+  it { should belong_to(:great_country).with_foreign_key('country_id') }
+  it { should belong_to(:mental_institution).touch(true) }
+  it { should belong_to(:world).dependent(:destroy) }
 end
 
 # Test::Unit
@@ -650,17 +650,17 @@ end
 
 # RSpec
 describe Person do
-  it { is_expected.to have_many(:friends) }
-  it { is_expected.to have_many(:acquaintances).through(:friends) }
-  it { is_expected.to have_many(:job_offers).through(:friends).source(:opportunities) }
-  it { is_expected.to have_many(:coins).conditions(condition: 'mint') }
-  it { is_expected.to have_many(:shirts).order('color') }
-  it { is_expected.to have_many(:hopes).class_name('Dream') }
-  it { is_expected.to have_many(:worries).with_foreign_key('worrier_id') }
-  it { is_expected.to have_many(:ideas).validate(false) }
-  it { is_expected.to have_many(:distractions).counter_cache(true) }
-  it { is_expected.to have_many(:topics_of_interest).touch(true) }
-  it { is_expected.to have_many(:secret_documents).dependent(:destroy) }
+  it { should have_many(:friends) }
+  it { should have_many(:acquaintances).through(:friends) }
+  it { should have_many(:job_offers).through(:friends).source(:opportunities) }
+  it { should have_many(:coins).conditions(condition: 'mint') }
+  it { should have_many(:shirts).order('color') }
+  it { should have_many(:hopes).class_name('Dream') }
+  it { should have_many(:worries).with_foreign_key('worrier_id') }
+  it { should have_many(:ideas).validate(false) }
+  it { should have_many(:distractions).counter_cache(true) }
+  it { should have_many(:topics_of_interest).touch(true) }
+  it { should have_many(:secret_documents).dependent(:destroy) }
 end
 
 # Test::Unit
@@ -698,15 +698,15 @@ end
 
 # RSpec
 describe Person do
-  it { is_expected.to have_one(:partner) }
-  it { is_expected.to have_one(:life).through(:partner) }
-  it { is_expected.to have_one(:car).through(:partner).source(:vehicle) }
-  it { is_expected.to have_one(:pet).conditions('weight < 80') }
-  it { is_expected.to have_one(:focus).order('priority desc') }
-  it { is_expected.to have_one(:chance).class_name('Opportunity') }
-  it { is_expected.to have_one(:job).with_foreign_key('worker_id') }
-  it { is_expected.to have_one(:parking_card).validate(false) }
-  it { is_expected.to have_one(:contract).dependent(:nullify) }
+  it { should have_one(:partner) }
+  it { should have_one(:life).through(:partner) }
+  it { should have_one(:car).through(:partner).source(:vehicle) }
+  it { should have_one(:pet).conditions('weight < 80') }
+  it { should have_one(:focus).order('priority desc') }
+  it { should have_one(:chance).class_name('Opportunity') }
+  it { should have_one(:job).with_foreign_key('worker_id') }
+  it { should have_one(:parking_card).validate(false) }
+  it { should have_one(:contract).dependent(:nullify) }
 end
 
 # Test::Unit
@@ -739,11 +739,11 @@ end
 
 # RSpec
 describe Person do
-  it { is_expected.to have_and_belong_to_many(:awards) }
-  it { is_expected.to have_and_belong_to_many(:issues).conditions(difficulty: 'hard') }
-  it { is_expected.to have_and_belong_to_many(:projects).order('time_spent') }
-  it { is_expected.to have_and_belong_to_many(:places_visited).class_name('City') }
-  it { is_expected.to have_and_belong_to_many(:interviews).validate(false) }
+  it { should have_and_belong_to_many(:awards) }
+  it { should have_and_belong_to_many(:issues).conditions(difficulty: 'hard') }
+  it { should have_and_belong_to_many(:projects).order('time_spent') }
+  it { should have_and_belong_to_many(:places_visited).class_name('City') }
+  it { should have_and_belong_to_many(:interviews).validate(false) }
 end
 
 # Test::Unit
@@ -774,8 +774,8 @@ end
 
 # RSpec
 describe Phone do
-  it { is_expected.to have_db_column(:supported_ios_version) }
-  it { is_expected.to have_db_column(:model).with_options(null: false) }
+  it { should have_db_column(:supported_ios_version) }
+  it { should have_db_column(:model).with_options(null: false) }
 
   it do
     should have_db_column(:camera_aperture).
@@ -815,8 +815,8 @@ end
 
 # RSpec
 describe Blog do
-  it { is_expected.to have_db_index(:user_id) }
-  it { is_expected.to have_db_index(:name).unique(true) }
+  it { should have_db_index(:user_id) }
+  it { should have_db_index(:name).unique(true) }
 end
 
 # Test::Unit
@@ -837,7 +837,7 @@ end
 
 # RSpec
 describe User do
-  it { is_expected.to have_readonly_attribute(:password) }
+  it { should have_readonly_attribute(:password) }
 end
 
 # Test::Unit
@@ -869,9 +869,9 @@ end
 
 # RSpec
 describe Product do
-  it { is_expected.to serialize(:customizations) }
-  it { is_expected.to serialize(:specifications).as(ProductSpecsSerializer) }
-  it { is_expected.to serialize(:options).as_instance_of(ProductOptionsSerializer) }
+  it { should serialize(:customizations) }
+  it { should serialize(:specifications).as(ProductSpecsSerializer) }
+  it { should serialize(:options).as_instance_of(ProductOptionsSerializer) }
 end
 
 # Test::Unit
@@ -897,7 +897,7 @@ end
 
 # RSpec
 describe ApplicationController do
-  it { is_expected.to filter_param(:secret_key) }
+  it { should filter_param(:secret_key) }
 end
 
 # Test::Unit
@@ -925,7 +925,7 @@ describe PostsController do
   describe 'GET #list' do
     before { get :list }
 
-    it { is_expected.to redirect_to(posts_path) }
+    it { should redirect_to(posts_path) }
   end
 end
 
@@ -956,7 +956,7 @@ describe PostsController do
   describe 'GET #show' do
     before { get :show }
 
-    it { is_expected.to render_template('show') }
+    it { should render_template('show') }
   end
 end
 
@@ -987,7 +987,7 @@ describe PostsController do
   describe 'GET #show' do
     before { get :show }
 
-    it { is_expected.to render_with_layout('posts') }
+    it { should render_with_layout('posts') }
   end
 end
 
@@ -1056,19 +1056,19 @@ describe PostsController do
   describe 'GET #index' do
     before { get :index }
 
-    it { is_expected.to respond_with(403) }
+    it { should respond_with(403) }
   end
 
   describe 'GET #show' do
     before { get :show }
 
-    it { is_expected.to respond_with(:locked) }
+    it { should respond_with(:locked) }
   end
 
   describe 'DELETE #destroy' do
     before { delete :destroy }
 
-    it { is_expected.to respond_with(500..600) }
+    it { should respond_with(500..600) }
   end
 end
 
@@ -1110,8 +1110,8 @@ end
 
 # RSpec
 describe 'Routing' do
-  it { is_expected.to route(:get, '/posts').to(controller: 'posts', action: 'index') }
-  it { is_expected.to route(:get, '/posts/1').to('posts#show', id: 1) }
+  it { should route(:get, '/posts').to(controller: 'posts', action: 'index') }
+  it { should route(:get, '/posts/1').to('posts#show', id: 1) }
 end
 
 # Test::Unit
@@ -1138,7 +1138,7 @@ describe PostsController do
   describe 'GET #show' do
     before { get :show }
 
-    it { is_expected.to set_session(:foo).to('bar') }
+    it { should set_session(:foo).to('bar') }
     it { is_expected.not_to set_session(:baz) }
   end
 end
@@ -1178,18 +1178,18 @@ describe PostsController do
   describe 'GET #index' do
     before { get :index }
 
-    it { is_expected.to set_the_flash.to('bar') }
-    it { is_expected.to set_the_flash.to(/bar/) }
-    it { is_expected.to set_the_flash[:foo].to('bar') }
+    it { should set_the_flash.to('bar') }
+    it { should set_the_flash.to(/bar/) }
+    it { should set_the_flash[:foo].to('bar') }
     it { is_expected.not_to set_the_flash[:baz] }
   end
 
   describe 'GET #show' do
     before { get :show }
 
-    it { is_expected.to set_the_flash.now }
-    it { is_expected.to set_the_flash[:foo].now }
-    it { is_expected.to set_the_flash[:foo].to('bar').now }
+    it { should set_the_flash.now }
+    it { should set_the_flash[:foo].now }
+    it { should set_the_flash[:foo].to('bar').now }
   end
 
   describe 'DELETE #destroy' do
